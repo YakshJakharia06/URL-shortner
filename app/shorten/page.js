@@ -125,16 +125,32 @@ const Shorten = () => {
               </thead>
               <tbody>
                 {allLinks.map((link) => (
-                  <tr key={link._id} className="border-b border-violet-50 hover:bg-rose-50/30 transition-colors">
-                    <td className="p-4 text-sm md:max-w-50 max-w-30 max-h-20 overflow-y-auto rounded-xl border border-violet-50 custom-scrollbar text-slate-600">{link.urlUsage || "General"}</td>
-                    <td className="p-4 text-sm font-semibold text-violet-600"><Link href={link.url} target='_blank'>{shorturl}</Link><div className='text-end'><button onClick={() => copyLink(`${link.url}`)} className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Copy</button></div></td>
-                    <td className="p-4 text-center">
-                      <span className="inline-block bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-xs font-black">
-                        {link.visits || 0}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+  <tr key={link._id} className="border-b border-violet-50 hover:bg-rose-50/30 transition-colors">
+    <td className="p-4 text-sm md:max-w-50 max-w-30 max-h-20 overflow-y-auto rounded-xl border border-violet-50 custom-scrollbar text-slate-600">
+      {link.urlUsage || "General"}
+    </td>
+    <td className="p-4 text-sm font-semibold text-violet-600">
+      
+      <Link href={`/${link.shorturl}`} target='_blank'>
+        {link.shorturl}
+      </Link>
+      <div className='text-end'>
+        <button 
+          onClick={() => copyLink(`${process.env.NEXT_PUBLIC_HOST}/${link.shorturl}`)} 
+          className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xs"
+        >
+          Copy
+        </button>
+      </div>
+    </td>
+    <td className="p-4 text-center">
+      <span className="inline-block bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-xs font-black">
+        {link.visits || 0}
+      </span>
+    </td>
+  </tr>
+))}
+
               </tbody>
             </table>
           </div>
@@ -146,6 +162,7 @@ const Shorten = () => {
 
 
 export default Shorten
+
 
 
 
